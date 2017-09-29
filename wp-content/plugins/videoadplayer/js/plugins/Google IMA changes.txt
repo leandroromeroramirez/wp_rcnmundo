@@ -1,0 +1,68 @@
+// lIne 302 videojs.ima.js
+
+ player.ima.onAdStarted_ = function(adEvent) {
+      currentAd = adEvent.getAd();
+      if (currentAd.isLinear()) {
+        adTrackingTimer = setInterval(
+            player.ima.onAdPlayheadTrackerInterval_, 250);
+		
+		document.getElementById('ima-ad-container').style.height = '100%';
+		document.getElementById('ima-ad-container').style.maxWidth = (player.width() + 'px');
+		document.getElementById('ima-ad-container').style.width = '100%';
+		//document.getElementById('ima-ad-container').style.bottom = '0';
+		document.getElementById('ima-ad-container').style.top = 'auto';
+		var iFrame = document.getElementById('ima-ad-container').getElementsByTagName("iframe")[0];
+		var idiv = document.getElementById('ima-ad-container').getElementsByTagName("div")[0];
+		iFrame.style.height = '100%';
+		iFrame.style.maxWidth = (player.width() + 'px');
+		iFrame.style.width = '100%';
+		idiv.style.height = '100%';
+		idiv.style.maxWidth = (player.width() + 'px');
+		idiv.style.width = '100%';
+        // Don't bump container when controls are shown
+        adContainerDiv.className = '';
+      } else {
+
+        // Bump container when controls are shown
+        adContainerDiv.className = 'bumpable-ima-ad-container';
+      }
+	  alert(currentAd.isLinear());
+	   if(currentAd.isLinear() == false){
+		 var playerheightdiv = (player.height() / 3);
+		// alert(playerheightdiv); 
+	  	document.getElementById('ima-ad-container').style.height = playerheightdiv+'px';
+		document.getElementById('ima-ad-container').style.maxWidth = (player.width() + 'px');
+		document.getElementById('ima-ad-container').style.width = '100%';
+		//document.getElementById('ima-ad-container').style.bottom = '0';
+		document.getElementById('ima-ad-container').style.top = 'auto';
+		var iFrame = document.getElementById('ima-ad-container').getElementsByTagName("iframe")[0];
+		var idiv = document.getElementById('ima-ad-container').getElementsByTagName("div")[0];
+		iFrame.style.height = playerheightdiv+'px';
+		iFrame.style.maxWidth = (player.width() + 'px');
+		iFrame.style.width = '100%';
+		idiv.style.height = playerheightdiv+'px';
+		idiv.style.maxWidth = (player.width() + 'px');
+		idiv.style.width = '100%';
+		//alert(currentAd.isLinear());
+	  }
+    };
+
+//videojs.ima.css
+.bumpable-ima-ad-container{
+	position: absolute;
+  display: block;
+}
+
+.bumpable-ima-ad-container {
+  
+  bottom: 3.8em;
+}
+.vjs-user-inactive .bumpable-ima-ad-container {
+  bottom: 0.5em;
+}
+.vjs-paused.vjs-user-inactive .bumpable-ima-ad-container {
+	bottom: 3.8em;
+}
+.ctrlhideclass .bumpable-ima-ad-container{
+	bottom:0.5em !important;
+}

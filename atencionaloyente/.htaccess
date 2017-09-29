@@ -1,0 +1,5 @@
+Rewriteengine  On
+# Add trailing slash in general
+RewriteCond %{REQUEST_URI} !\.[a-z0-9]+$ [NC]
+RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
+

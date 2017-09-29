@@ -1,0 +1,114 @@
+/*.vjs-default-skin div.vjs-big-play-button {
+	top: 50%; left: 50%;
+	margin: -1.3em 0 0 -2em;
+}*/
+.vjs-default-skin .vjs-time-controls div, .vjs-default-skin .vjs-time-divider span {
+	font-size: 1em;
+	line-height: 3em;
+}
+
+/* Responsive Videos */
+.video-wrapper {
+    position: relative;
+    /*padding-bottom: 74.25%;  4:3 ratio */
+    height: 0;
+    overflow: hidden;
+}
+.video-wrapper video,.videoWrapper,.video-wrapper .video-js {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+}
+.video-wrapper .video-js, .video-wrapper img.vjs-poster {
+    width: 100% !important;
+    height: 100% !important; //these need !important because IE wants to set height/width to 100px
+    max-width: 100%;
+}
+.video-wrapper .vjs-poster{
+	background-size: cover !important;
+}
+
+.video-wrapper video::-webkit-media-controls {
+    display:none !important;
+}
+
+#mpCountDownMainDiv, #tapToPlay, #domainForbidenDownMain, #dexceededNumLoadsForbidenDownMain{height:100%;background: rgb(23,23,23);position: absolute;top: 0;left: 0;text-align:center;max-width:100%;z-index:99997;}
+
+.mpCountDownTopText{display:inline-block;position: relative;  top: 50%;  margin-top:-83px;color: white;font-size: 31px;font-family:Arial, Helvetica, sans-serif; }
+
+@media only screen and (max-width: 480px) { 
+
+	.mpCountDownTopText{font-size:12px !important;
+	  display: inline-block;
+	  position: relative;
+	  /*margin-top:-80px;*/
+	  margin-top:-50px;
+	    width: 100%;
+	  color: white;
+	  font-family: Arial, Helvetica, sans-serif;
+		}
+		
+		.mpCountDownMainDivIn{margin-left:5px;}
+
+ }
+ .vjs-default-skin .vjs-big-play-button{
+	/* border-radius:0px !important;*/
+ }
+ .vjs-default-skin .vjs-big-play-button {
+  left: 0.5em;
+  top: 0.5em;
+  font-size: 3em;
+  display: block;
+  z-index: 2;
+  position: absolute;
+  width: 2.5em;
+  height: 2.5em;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  opacity: 1;
+  /* Need a slightly gray bg so it can be seen on black backgrounds */
+  /* background-color-with-alpha */
+  background-color: #07141e;
+  background-color: rgba(7, 20, 30, 0.7);
+  /*border: 0.1em solid #3b4249;*/
+  border: 0.15em solid #FFFFFF;
+  /* border-radius */
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+  /* box-shadow */
+  -webkit-box-shadow: 0px 0px 1em rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: 0px 0px 1em rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 0px 1em rgba(255, 255, 255, 0.25);
+  /* transition */
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+/* Optionally center */
+.vjs-default-skin.vjs-big-play-centered .vjs-big-play-button {
+  /* Center it horizontally */
+  left: 50%;
+  margin-left: -1.3em;
+  /* Center it vertically */
+  top: 50%;
+  margin-top: -1.3em;
+}
+.vjs-default-skin .vjs-big-play-button:before {
+content: "\e001";
+font-family: VideoJS;
+font-size:1.03em;
+line-height: 2.2em;
+text-shadow: 0.05em 0.05em 0.1em #000;
+text-align: center /* Needed for IE8 */;
+position: absolute;
+left: 3px;
+width: 100%;
+height: 100%;
+}
+.vjs-default-skin.vjs-has-started .vjs-control-bar, .vjs-poster, .vjs-default-skin .vjs-big-play-button{
+/*z-index: 99998;*/
+}
