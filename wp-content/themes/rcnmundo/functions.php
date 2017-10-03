@@ -14,7 +14,7 @@ add_action( 'after_setup_theme', 'rcnmundo_setup' );
 function rcnmundo_scripts_styles() {
 	global $wp_styles;
 	//cargar las librerias del tema
-	
+
 	//cargar la hoja de estilo principal
 	//wp_enqueue_style( 'boostrap', get_template_directory_uri() . '/css/bootstrap.min.css' );
 	//wp_enqueue_style( 'rcnmundo-style', get_template_directory_uri() . '/style.css' );
@@ -127,11 +127,11 @@ function excerpt($limit) {
     $excerpt = implode(" ",$excerpt).'...';
   } else {
     $excerpt = implode(" ",$excerpt);
-  }	
+  }
   $excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
   return $excerpt;
 }
- 
+
 function content($limit) {
   $content = explode(' ', get_the_content(), $limit);
   if (count($content)>=$limit) {
@@ -139,9 +139,9 @@ function content($limit) {
     $content = implode(" ",$content).'...';
   } else {
     $content = implode(" ",$content);
-  }	
+  }
   $content = preg_replace('/\[.+\]/','', $content);
-  $content = apply_filters('the_content', $content); 
+  $content = apply_filters('the_content', $content);
   $content = str_replace(']]>', ']]&gt;', $content);
   return $content;
 }
@@ -162,4 +162,29 @@ function add_twitter_cards() {
 	<?php }
 }
 add_action('wp_head', 'add_twitter_cards');
+
+
+// FUNCIONES PARA JSON
+
+
+// The object type. For custom post types, this is 'post';
+// for custom comment types, this is 'comment'. For user meta,
+// this is 'user'.
+$object_type = 'post';
+$args1 = array( // Validate and sanitize the meta value.
+    // Note: currently (4.7) one of 'string', 'boolean', 'integer',
+    // 'number' must be used as 'type'. The default is 'string'.
+    'type'         => 'string',
+    // Shown in the schema for the meta key.
+    'description'  => 'A meta key associated with a string meta value.',
+    // Return a single value of the type.
+    'single'       => true,
+    // Show in the WP REST API response. Default: false.
+    'show_in_rest' => true,
+);
+register_meta( $object_type, 'url_stream', $args1 );
+register_meta( $object_type, 'site', $args1 );
+register_meta( $object_type, 'station', $args1 );
+
 ?>
+

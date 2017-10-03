@@ -232,7 +232,8 @@ var_dump($urlstream);
 
 						<?php $vid_ima = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ); ?>
 
-<style>#vap<?php the_ID(); ?> { font-size:100%; } #vap<?php the_ID(); ?>.vjs-default-skin { color: #CCCCCC; }#vap<?php the_ID(); ?>.vjs-default-skin .vjs-play-progress, #vap<?php the_ID(); ?>.vjs-default-skin .vjs-volume-level { background-color: #0C70B4; }#vap<?php the_ID(); ?>.vjs-default-skin .vjs-control-bar, #vap<?php the_ID(); ?>.vjs-default-skin .vjs-big-play-button { background: rgba(0,0,0,0.7); }#vap<?php the_ID(); ?>.vjs-default-skin .vjs-slider { background: rgba(0,0,0,0.2333333333333333) } </style>
+<style>
+#vap<?php the_ID(); ?> { font-size:100%; } #vap<?php the_ID(); ?>.vjs-default-skin { color: #CCCCCC; }#vap<?php the_ID(); ?>.vjs-default-skin .vjs-play-progress, #vap<?php the_ID(); ?>.vjs-default-skin .vjs-volume-level { background-color: #0C70B4; }#vap<?php the_ID(); ?>.vjs-default-skin .vjs-control-bar, #vap<?php the_ID(); ?>.vjs-default-skin .vjs-big-play-button { background: rgba(0,0,0,0.7); }#vap<?php the_ID(); ?>.vjs-default-skin .vjs-slider { background: rgba(0,0,0,0.2333333333333333) } </style>
 
         	<!--<source src="http://live.rcnmundo.com/rcnkids.aac" poster="<?php echo $vid_ima; ?>" type='video/mp4' /> {{url_stream}} -->
 
