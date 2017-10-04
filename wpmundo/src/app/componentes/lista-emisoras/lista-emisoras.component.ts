@@ -30,7 +30,7 @@ export class ListaEmisorasComponent implements OnInit {
   selectedValue:number;
   arregloSeleccionado:Emisora[];
   urlStream;
-  noticias:Noticia[];
+  arregloNoticias:Noticia[];
   ngOnInit() {}
 
 
@@ -84,8 +84,12 @@ export class ListaEmisorasComponent implements OnInit {
 
 
   traerNoticas(url){
-    this._not.getJson(url).subscribe(res => {
-      this.noticias = res;
+    let noti;
+    this._not.getNoticias(url, true).subscribe(res => {
+      noti = res;
+      console.log(noti);
+      this.arregloNoticias = this._not.crearObjNoti(noti);
+
     })
 
   }

@@ -63,10 +63,5 @@ export class EmisorasService {
     return ArregloPost;
   }
 
-  getNoticias(_url): Observable<any>{
-    var comp:string = "/wp-json/wp/v2/posts";
-    console.log("traer noticias")
-    return this._http.get(_url+comp).map((res: Response) => res.json());
-  }
 
 }

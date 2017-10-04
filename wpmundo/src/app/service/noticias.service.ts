@@ -14,20 +14,17 @@ export class NoticiasService {
 	constructor(private _http: Http, @Inject(DOCUMENT) private document: any) { }
 
 
-	getJson(_url){
-
-		const headerDict = {
-			'Content-Type': 'application/json',
-			'Accept': 'application/json',
-			'Access-Control-Allow-Headers': '*',
-		  }
-
-		  const headerObj = {
-			headers: new Headers(headerDict),
-		  };
+	getNoticias(_url,noticia:boolean){
+		var comp:string = "wp-json/wp/v2/posts";
+		let ObjJson;
 
 		// petición por get a esa url de un api rest de pruebas
-		let ObjJson = this._http.get(_url,headerObj).map(res => res.json());
+		if (noticia) {
+			ObjJson = this._http.get(_url+comp).map(res => res.json());
+		}else{
+			ObjJson = this._http.get(_url).map(res => res.json());
+		}
+
 		return ObjJson;
 	}
 
@@ -44,35 +41,29 @@ export class NoticiasService {
 			titulo = titulo.substr(0,71);
 
 			var teaser: string = _json[i].excerpt.rendered;
-
 			var fecha:Date = _json[i].date;
 			var rutaUrl = _json[i].link;
 			var logoMarca = _json[i].logomarca;
-			var imgjson = _json[i].imgjson;
-			var contenido = _json[i].content.rendered;
-
-			if (teaser === ''){
-				let contRemp:string = contenido;
-				contRemp = this.arreglarStrings('<p style="text-align: justify;">','', contRemp).trim();
-				contRemp = this.arreglarStrings('<!--more-->','', contRemp);
-				contRemp = this.arreglarStrings('<p>','', contRemp);
-				contRemp = this.arreglarStrings('</p>','', contRemp);
-				contRemp = this.arreglarStrings('<strong>','', contRemp);
-				contRemp = this.arreglarStrings('</strong>','', contRemp);
-				contRemp = this.arreglarStrings('<br />','',contRemp);
-				contRemp = contRemp.trim();
-				teaser = contRemp.substring(0,73);
+			var imgjson;
+			if(_json[i]._links['wp:featuredmedia']){
+				imgjson = _json[i]._links['wp:featuredmedia']['0']['href'];
 			}else{
-				teaser = teaser.trim();
-				teaser = this.arreglarStrings('<p>','', teaser);
-				teaser = this.arreglarStrings('</p>','', teaser);
-				teaser = this.arreglarStrings('<strong>','', teaser);
-				teaser = this.arreglarStrings('</strong>','', teaser);
+				imgjson = "http://image.rcn.com.co.s3.amazonaws.com/rcnradio/prev2.jpg";
 			}
-			//console.log(teaser);
-			teaser = this.arreglarStrings('<p>','',teaser);
-			teaser = this.arreglarStrings('</p>','',teaser);
-    		let n = new Noticia(id, titulo.substring(0,73) ,teaser.substring(0,78) ,fecha , rutaUrl,logoMarca , imgjson ,contenido);
+
+			var contenido = _json[i].content.rendered;
+			let jsonIMG;
+
+			let n = new Noticia(id, titulo.substring(0,73) ,teaser.substring(0,78) ,fecha , rutaUrl,logoMarca , imgjson ,contenido);
+			if(imgjson != "http://image.rcn.com.co.s3.amazonaws.com/rcnradio/prev2.jpg"){
+				this.getNoticias(imgjson, false).subscribe(res => { jsonIMG = res;
+					n.urlImg = jsonIMG.source_url;
+				  });
+			}else{
+				n.urlImg = imgjson;
+			}
+
+
     		ArregloNoticias.push(n);
 		}
 		return ArregloNoticias;
@@ -127,7 +118,7 @@ export class NoticiasService {
 			if (valor === 'sinImagen'){
 				allnoti[i].urlImg = 'http://image.rcn.com.co.s3.amazonaws.com/rcnradio/prev2.jpg';
 			}else{
-				this.getJson(valor).subscribe(
+				this.getNoticias(valor,false).subscribe(
 					result => {
 						imgDatos = result;
 						allnoti[i].urlImg = imgDatos.source_url;

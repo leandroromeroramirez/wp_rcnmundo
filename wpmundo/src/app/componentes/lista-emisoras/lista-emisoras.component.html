@@ -13,6 +13,7 @@
     <div class="row">
       <div class="col" *ngFor="let e of arregloEmisora">
           <img [src]="e.urlImg" alt="" (click)="cargarEmisora(e)"   class="img-thumbnail" >
+          <h5>{{e.site}}</h5>
 
       </div>
   </div>
@@ -26,29 +27,15 @@
 </div>
 
 <!-- Ultima hora  -->
-
-<div class=certItems>
-
-         <div class="title">
-         <div class="log_papa"></div>
-         </div>
-
-        <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let data of noticias" >
-                        <div class="itemE">
-                            <a href="{{data.urlNoti}}" target="_blank">
-                            <div class="logo">
-                                <img src="{{data.urlLogoMarca}}" alt="">
-                            </div>
-                            <div class="wrap_img">
-                                <img src="{{ data.urlImg }}" alt="">
-                            </div>
-                                <h1 class="titulo" [innerHTML] = "data.titulo"></h1>
-
-                            </a>
-                        </div>
+<div class="row">
+        <div class="card-group">
+            <div class="card" style="width: 20rem;" *ngFor="let data of arregloNoticias" >
+                    <img class="card-img-top" [src]="data.urlImg" alt="Card image cap">
+                    <div class="card-block">
+                      <h4 class="card-title">{{data.titulo}}</h4>
+                      <p class="card-text">{{data.teaser}}</p>
+                      <a [href]="data.urlNoti" class="btn btn-primary" target="_blank">Ver más</a>
                     </div>
-        </div>
-
-
- </div>
+                  </div>
+    </div>
+</div>
